@@ -1,0 +1,118 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var user = User as ClaimsPrincipal;
+
+    var username = user?.FindFirst("username")?.Value;
+    var role = user?.FindFirst(ClaimTypes.Role)?.Value;
+}
+@model ProfileIndexViewModel
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">User Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="card-text"><strong>Name:</strong> @Model.Name</p>
+                    <p class="card-text"><strong>Role:</strong> @Model.Role</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="card-text"><strong>Address:</strong> @Model.Address</p>
+                    <p class="card-text">
+                        <strong>Balance:</strong> @Model.Balance
+                        @if (role == "Buyer")
+                        {
+                            <button class="btn btn-success float-right" data-bs-toggle="modal" data-bs-target="#myModal">Deposit</button>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="mt-4">
+        <h2>My Transaction History</h2>
+        <table class="table table-stripe">
+            <thead class="thead">
+                <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Shipment</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (TransactionTableViewModel row in Model.TransactionList)
+                {
+                    <tr>
+                        <td>@row.Date</td>
+                        <td>@row.Product</td>
+                        <td>@row.Quantity</td>
+                        <td>@row.Shipment</td>
+                        <td>@row.TotalPrice</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <div class="pagination-container">
+                            <ul class="pagination">
+                                @for (int num = 1; num <= Model.paginationInfo.TotalPage; num++)
+                                {
+                                    @if (num == Model.paginationInfo.CurrentPage)
+                                    {
+                                        <li class="page-item active"><a class="page-link" asp-action="Index" asp-route-page="@num">@num</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@num">@num</a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group form-dialog">
+                        <label for="depositAmount">Deposit Amount</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Rp.</span>
+                            </div>
+
+                            <input type="number" class="form-control" id="Amount" min="10000" required/>
+                            <div class="validation-message" data-for="Amount"></div>
+                            <input type="hidden" id="Username" value="@username" />
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="submit-button">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/profile.js" asp-append-version="true" defer></script>

@@ -1,0 +1,146 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var user = User as ClaimsPrincipal;
+
+    var username = user?.FindFirst("username")?.Value;
+    var role = user?.FindFirst(ClaimTypes.Role)?.Value;
+}
+@model ShopIndexViewModel
+
+<div class="container"
+     style="
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        max-width:300px;
+        margin-block:30px;
+        margin-inline:10.5px">
+
+    <div class="col">
+        <div class="search-box">
+            <h4>Search</h4>
+            <form style="padding:0; margin:0;">
+                <div class="form-group">
+                    <label asp-for="Name" class="form-group">Name:</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter Product Name">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Category" class="form-group">Category:</label>
+                    <input asp-for="Category" class="form-control" placeholder="Enter Category">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="form-group">Description:</label>
+                    <input asp-for="Description" class="form-control" placeholder="Enter Description">
+                </div>
+
+                <button class="btn btn-primary" id="search-button" style="margin-block: 15px">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h2>Shop</h2>
+
+    <table class="table table-stripe">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Seller</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ShopTableViewModel row in Model.ShopTable)
+            {
+                <tr>
+                    <td>
+                        <button class="btn btn-primary" onclick="AddToCart(@row.ProductId)" data-id="@row.ProductId">Add To Cart</button>
+                        <button class="btn btn-primary" onclick="fetchAndShowProductInfo(this)" data-id="@row.ProductId">Detail Info</button>
+                    </td>
+                    <td>@row.SellerName</td>
+                    <td>@row.ProductName</td>
+                    <td>@row.Price</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <div class="pagination-container">
+                        <ul class="pagination">
+                            @for (int num = 1; num <= Model.PaginationInfo.TotalPage; num++)
+                            {
+                                @if (num == Model.PaginationInfo.CurrentPage)
+                                {
+                                    <li class="page-item active"><a class="page-link" asp-action="Index" asp-route-name="@Model.Name" asp-route-category="@Model.Category" asp-route-description="@Model.Description" asp-route-page="@num">@num</a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" asp-action="Index" asp-route-name="@Model.Name" asp-route-category="@Model.Category" asp-route-description="@Model.Description" asp-route-page="@num">@num</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div class="modal fade" id="productInfoModal" tabindex="-1" role="dialog" aria-labelledby="productInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productInfoModalLabel">Product Information</h5>
+            </div>
+            <div class="modal-body" id="productInfoBody">
+                <!-- Product information will be displayed here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ClosePopUpInfo()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cart-form" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="insertModalLabel">Cart Form</h5>
+                <button type="button" class="close btn btn-secondary" onclick="CloseForm()">
+                    <strong>X</strong>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form to collect data -->
+                <form id="insertForm" class="form-dialog">
+                    <input type="hidden" id="buyer" value="@username"  />
+                    <input type="hidden" id="productId" />
+                    <div class="form-group">
+                        <label for="shipment">Shipment:</label>
+                        <select id="shipmentId" name="shipmentMethod" class="form-select" asp-items="@Model.SelectShipment">
+                            <option value="0">Please select a shipment</option>
+                            <!-- This is where the options will be generated -->
+                        </select>
+                        <div class="validation-message" data-for="ShipmentId" style="color:red"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">quantity:</label>
+                        <input type="number" class="form-control" min="1" id="quantity" required>
+                        <div class="validation-message" data-for="Quantity" style="color:red"></div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" onclick="SubmitCartForm()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/shop.js" asp-append-version="true" defer></script>

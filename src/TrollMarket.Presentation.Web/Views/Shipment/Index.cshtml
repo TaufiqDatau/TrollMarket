@@ -1,0 +1,104 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ShipmentIndexViewModel
+<div class="mt-4">
+    <h2>Shipment</h2>
+    <div class="mb-3">
+        <button class="btn btn-primary" id="insert-button" onclick="InsertForm()">Add New Shipment Company</button>
+
+    </div>
+    <table class="table table-stripe">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Service</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ShipmentTableViewModel row in Model.ShipmentTable)
+            {
+                <tr>
+                    <td>
+                        <button class="btn btn-primary" onclick="DeleteShipment(@row.ShipmentId)">Delete</button>
+                        <button class="btn btn-primary" onclick="EditForm(@row.ShipmentId)" data-id="@row.ShipmentId">Edit</button>
+                        @if (row.ServiceStatus == "No")
+                        {
+                            <button class="btn btn-secondary" onclick="StopService(@row.ShipmentId)" data-id="@row.ShipmentId" disabled>Stop Service</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary" onclick="StopService(@row.ShipmentId)" data-id="@row.ShipmentId">Stop Service</button>
+
+                        }
+                    </td>
+                    <td>@row.Name</td>
+                    <td>@row.Price</td>
+                    <td>@row.ServiceStatus</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <div class="pagination-container">
+                        <ul class="pagination">
+                            @for (int num = 1; num <= Model.PaginationInfo.TotalPage; num++)
+                            {
+                                @if (num == Model.PaginationInfo.CurrentPage)
+                                {
+                                    <li class="page-item active"><a class="page-link" asp-action="Index" asp-route-page="@num">@num</a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@num">@num</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div class="modal fade" id="shipment-form" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="insertModalLabel">Shipment</h5>
+                <button type="button" class="close btn btn-secondary" onclick="CloseForm()">
+                    <strong>X</strong>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Form to collect data -->
+                <div id="insertForm" class="form-dialog">
+                    <input type="hidden" id="shipmentId" />
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" required>
+                        <div class="field-validation-error" data-for="Name"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input type="text" class="form-control" id="price" required>
+                        <div class="field-validation-error" data-for="Price"></div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceStatus">Service Status:</label>
+                        <input type="checkbox" class="form-checkbox" id="serviceStatus">
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="SubmitForm()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/shipment.js" asp-append-version="true" defer></script>
+

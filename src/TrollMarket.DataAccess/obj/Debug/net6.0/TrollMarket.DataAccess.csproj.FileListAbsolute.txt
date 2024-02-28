@@ -1,0 +1,14 @@
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\bin\Debug\net6.0\TrollMarket.DataAccess.deps.json
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\bin\Debug\net6.0\TrollMarket.DataAccess.runtimeconfig.json
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\bin\Debug\net6.0\TrollMarket.DataAccess.dll
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\bin\Debug\net6.0\TrollMarket.DataAccess.pdb
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\obj\Debug\net6.0\TrollMarket.DataAccess.csproj.AssemblyReference.cache
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\obj\Debug\net6.0\TrollMarket.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\obj\Debug\net6.0\TrollMarket.DataAccess.AssemblyInfoInputs.cache
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\obj\Debug\net6.0\TrollMarket.DataAccess.AssemblyInfo.cs
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\obj\Debug\net6.0\TrollMarket.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\obj\Debug\net6.0\TrollMarket.DataAccess.dll
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\obj\Debug\net6.0\refint\TrollMarket.DataAccess.dll
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\obj\Debug\net6.0\TrollMarket.DataAccess.pdb
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\obj\Debug\net6.0\TrollMarket.DataAccess.genruntimeconfig.cache
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.DataAccess\obj\Debug\net6.0\ref\TrollMarket.DataAccess.dll

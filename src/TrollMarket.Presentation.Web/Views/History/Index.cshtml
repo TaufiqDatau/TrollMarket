@@ -1,0 +1,98 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model HistoryIndexViewModel
+@* <div class="container"
+     style="
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        max-width:300px;
+        margin-block:30px;
+        margin-inline:10.5px">
+
+    <div class="col">
+        <div class="search-box">
+            <h4>Search</h4>
+            <form style="padding:0; margin:0;">
+                <div class="form-group">
+                    <label asp-for="SellerUsername" class="form-group">Seller:</label>
+                    <select class="form-select" asp-for="SellerUsername" asp-items="@Model.SellerList">
+                        <option value="">Select All</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BuyerUsername" class="form-group">Buyer:</label>
+                    <select class="form-select" asp-for="BuyerUsername" asp-items="@Model.BuyerList">
+                        <option value="">Select All</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" id="search-button" style="margin-block: 15px">Search</button>
+            </form>
+        </div>
+    </div>
+</div> *@
+
+<div class="mt-4">
+    <h2>History</h2>
+
+    <table id="history-table" class="table table-stripe">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Buyer</th>
+                <th>Seller</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Shipment</th>
+                <th>Total Transaction</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (HistoryTableViewModel row in Model.HistoryTables)
+            {
+                <tr>
+                    <td>@row.Date</td>
+                    <td>@row.BuyerName</td>
+                    <td>@row.SellerName</td>
+                    <td>@row.ProductName</td>
+                    <td>@row.Quantity</td>
+                    <td>@row.ShipmentName</td>
+                    <td>@row.TotalPrice</td>
+                </tr>
+            }
+        </tbody>
+        @* <tfoot>
+            <tr>
+                <td colspan="7">
+                    <div class="pagination-container">
+                        <ul class="pagination">
+                            @for (int num = 1; num <= Model.PaginationInfo.TotalPage; num++)
+                            {
+                                @if (num == Model.PaginationInfo.CurrentPage)
+                                {
+
+                                    <li class="page-item active"><a class="page-link" asp-action="Index" asp-route-seller="@Model.SellerUsername" asp-route-buyer="@Model.BuyerUsername" asp-route-page="@num">@num</a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" asp-action="Index" asp-route-seller="@Model.SellerUsername" asp-route-buyer="@Model.BuyerUsername" asp-route-page="@num">@num</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tfoot> *@
+    </table>
+</div>
+<script>
+    $('#history-table').dataTable({
+        "serverSide": true,
+        "ajax": {
+            "url": "/History",
+            "type": "POST"
+        }
+    });
+</script>

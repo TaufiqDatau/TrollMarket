@@ -1,0 +1,91 @@
+﻿@model MerchandiseIndexViewModel
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <script>
+        swal("Cancelled!", "@ViewBag.ErrorMessage", "error");
+    </script>
+}
+@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+{
+    <script>
+        swal("Success!", "@ViewBag.SuccessMessage", "success");
+    </script>
+
+}
+<div class="mt-4">
+    <h2>My Merchandise</h2>
+    <div class="mb-3">
+        <a asp-action="Insert" class="btn btn-primary">Add New Merchandise</a>
+    </div>
+    <table class="table table-stripe">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Discontinue</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (MerchandiseTableViewModel row in Model.Merchandises)
+            {
+                <tr>
+                    <td>
+                        <a class="btn btn-primary" asp-action="delete" asp-route-id="@row.ProductId">Delete</a>
+                        <a class="btn btn-primary" asp-action="edit" asp-route-id="@row.ProductId">Edit</a>
+                        <button class="btn btn-primary info-btn" data-id="@row.ProductId" onclick="fetchAndShowProductInfo(this)">Info</button>
+                        @if (row.DiscontinuedDate.HasValue)
+                        {
+                            <button class="btn btn-secondary discontinue-btn" data-id="@row.ProductId" disabled>Discontinue</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary discontinue-btn" data-id="@row.ProductId">Discontinue</button>
+                        }
+                    </td>
+                    <td>@row.ProductName</td>
+                    <td>@row.Category</td>
+                    <td>@row.DiscontinueStatus</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <div class="pagination-container">
+                        <ul class="pagination">
+                            @for (int num = 1; num <= Model.PaginationInfo.TotalPage; num++)
+                            {
+                                @if (num == Model.PaginationInfo.CurrentPage)
+                                {
+                                    <li class="page-item active"><a class="page-link" asp-action="Index" asp-route-page="@num">@num</a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@num">@num</a></li>
+                                }
+                                
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="modal" id="productInfoModal" tabindex="-1" role="dialog" aria-labelledby="productInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productInfoModalLabel">Product Information</h5>
+            </div>
+            <div class="modal-body" id="productInfoBody">
+                <!-- Product information will be displayed here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="ClosePopUpInfo()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/merch.js" asp-append-version="true" defer></script>

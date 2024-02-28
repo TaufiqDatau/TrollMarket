@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../shared/_AuthLayout.cshtml";
+}
+@model LoginFormViewModel
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Login</h3>
+                </div>
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                    {
+                        <script>
+                            swal("Cancelled", "@ViewBag.ErrorMessage", "error");
+                        </script>
+                    }
+                    @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+                    {
+                        <script>
+                            swal("Success!", "@ViewBag.SuccessMessage", "success");
+                        </script>
+                        
+                    }
+                    <form method="post">
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label">Username</label>
+                            <input asp-for="Username" type="text" class="form-control" placeholder="Enter your username">
+                            <span asp-validation-for="Username"></span>
+
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Password</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password">
+
+                            <span asp-validation-for="Password"></span>
+
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Role" class="form-label">Role</label>
+                            <select asp-for="Role" class="form-select" id="role">
+                                <option value="admin">Admin</option>
+                                <option value="buyer">Buyer</option>
+                                <option value="seller">Seller</option>
+                            </select>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                    <div class="card-footer text-center">
+                        <p class="mb-0">Don't have an account?</p>
+                        <a asp-action="Register" asp-route-role="Buyer" class="btn btn-link">Register as Buyer</a>
+                        <a asp-action="Register" asp-route-role="Seller" class="btn btn-link">Register as Seller</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

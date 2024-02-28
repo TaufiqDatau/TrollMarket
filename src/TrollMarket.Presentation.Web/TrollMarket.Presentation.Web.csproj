@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\js\cart.js" />
+    <Content Remove="wwwroot\js\shipment.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\cart.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\shipment.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\cart.js" />
+    <None Include="wwwroot\js\shipment.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TrollMarket.Business\TrollMarket.Business.csproj" />
+    <ProjectReference Include="..\TrollMarket.DataAccess\TrollMarket.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

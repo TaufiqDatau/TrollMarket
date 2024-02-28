@@ -1,0 +1,62 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.input-invalid,
+.input-validation-error {
+    outline: 2px solid rgb(255, 0, 0);
+}
+
+.upsert-dialog .input-invalid:focus-visible,
+input.input-validation-error:focus-visible,
+textarea.input-validation-error:focus-visible {
+    outline: 2px solid rgb(255, 0, 0);
+}
+
+
+.validation-message-input {
+    background-color: red;
+    border-radius: 10px;
+}
+
+.validation-message-input p {
+        margin: 0;
+        margin-top: 5px;
+        padding: 2px 7px;
+        text-align: center;
+}
+.field-validation-error {
+    padding: 2px 10px;
+    color:red;
+    text-align: center;
+}
+
+.nav-scroller {
+    background-color: #fff; /* White background */
+    border-bottom: 1px solid #ddd; /* Add a border for separation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+    color: #007bff; /* Blue color */
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+    .nav-link:hover {
+        color: #0056b3; /* Darker blue on hover */
+    }

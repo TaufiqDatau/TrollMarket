@@ -1,0 +1,81 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var user = User as ClaimsPrincipal;
+
+    var username = user?.FindFirst("username")?.Value;
+    var role = user?.FindFirst(ClaimTypes.Role)?.Value;
+}
+@model CartIndexViewModel
+
+<script src="~/js/cart.js" asp-append-version="true" defer></script>
+<div class="mt-4">
+
+    <h2>Shipment</h2>
+    @if (Model.TotalPrice > Model.CurrentBalance)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Warning!</strong> You're balance is insufficient to do this transaction.
+        </div>
+    }
+    else if (Model.CartTable.Count() == 0)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Info!</strong> There is no item currently in you cart.
+        </div>
+    }
+    else
+    {
+        <div class="mb-3">
+            <button class="btn btn-primary" onclick="PurchaseAll('@username')">Purchase All</button>
+        </div>
+    }
+
+    <table class="table table-stripe">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Shipment</th>
+                <th>Seller</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (CartTableViewModel row in Model.CartTable)
+            {
+                <tr>
+                    <td>
+                        <button class="btn btn-primary" onclick="RemoveFromCart('@username', @row.ProductId, @row.ShipmentId)">Remove</button>
+                    </td>
+                    <td>@row.ProductName</td>
+                    <td>@row.Quantity</td>
+                    <td>@row.ShipmentName</td>
+                    <td>@row.SellerName</td>
+                    <td>@row.TotalPrice</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6">
+                    <div class="pagination-container">
+                        <ul class="pagination">
+                            @for (int num = 1; num <= Model.PaginationInfo.TotalPage; num++)
+                            {
+                                @if (num == Model.PaginationInfo.CurrentPage)
+                                {
+                                    <li class="page-item active"><a class="page-link" asp-action="Index" asp-route-page="@num">@num</a></li>
+                                }else{
+                                    <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@num">@num</a></li>  
+                                }
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

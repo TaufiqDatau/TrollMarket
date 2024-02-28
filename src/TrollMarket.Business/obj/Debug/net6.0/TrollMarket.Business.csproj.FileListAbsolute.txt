@@ -1,0 +1,15 @@
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\bin\Debug\net6.0\TrollMarket.Business.deps.json
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\bin\Debug\net6.0\TrollMarket.Business.dll
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\bin\Debug\net6.0\TrollMarket.Business.pdb
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\obj\Debug\net6.0\TrollMarket.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\obj\Debug\net6.0\TrollMarket.Business.AssemblyInfoInputs.cache
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\obj\Debug\net6.0\TrollMarket.Business.AssemblyInfo.cs
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\obj\Debug\net6.0\TrollMarket.Business.csproj.CoreCompileInputs.cache
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\obj\Debug\net6.0\TrollMarket.Business.dll
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\obj\Debug\net6.0\refint\TrollMarket.Business.dll
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\obj\Debug\net6.0\TrollMarket.Business.pdb
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\obj\Debug\net6.0\ref\TrollMarket.Business.dll
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\bin\Debug\net6.0\TrollMarket.DataAccess.dll
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\bin\Debug\net6.0\TrollMarket.DataAccess.pdb
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\obj\Debug\net6.0\TrollMarket.Business.csproj.AssemblyReference.cache
+C:\Users\1874\Bootcamp\Framework\EXAM\TrollMarket\src\TrollMarket.Business\obj\Debug\net6.0\TrollMarket.Business.csproj.CopyComplete
